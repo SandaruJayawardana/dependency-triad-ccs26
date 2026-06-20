@@ -1,5 +1,5 @@
 '''
-    Algorithm 2
+    Algorithm uncalibrated (i.e., alpha, gamma, delta)
 '''
 import numpy as np
 import math
@@ -112,7 +112,7 @@ def computing_optimal_t(G, G_prime, alpha, beta, delta_initial, delta):
             effective_t += 1
     return effective_t
 
-def Algo2_privacy_leakage_final(eps, CMF = [], sparse_approx =  False, delta_ = 0, default_beta = 0, is_calibrated = False, optimal_APL=0, eps_0=0.1, for_distribution_bias = False, DB_value = False, leakage_only = False, DB_parameters = (0, 0, 0, 0)):
+def uncalibrate_CPL(eps, CMF = [], sparse_approx =  False, delta_ = 0, default_beta = 0, is_calibrated = False, optimal_APL=0, eps_0=0.1, for_distribution_bias = False, DB_value = False, leakage_only = False, DB_parameters = (0, 0, 0, 0)):
     if not(leakage_only):
         num_rows, num_columns = np.shape(CMF)
         max_val = 0
@@ -219,25 +219,7 @@ def Algo2_privacy_leakage_final(eps, CMF = [], sparse_approx =  False, delta_ = 
             leakage = eps
     if leakage > max_val:
         max_val = leakage
-    # print("Dependency Budget leakage new", max_val, "delta ", delta)
     end_time = time.time()
     if for_distribution_bias:
         return max_val, end_time-start_time, alpha, p1_dict[str(alpha)]
     return max_val, end_time-start_time, beta
-
-
-def uncalibrate_CPL(eps, CMF, sparse_approx =  False, delta_ = 0, default_beta = 0, target_val = 0):
-    beta = 0
-    max_val,t, beta = Algo2_privacy_leakage_final(eps, CMF, sparse_approx =  sparse_approx, delta_ = delta_, default_beta = beta)
-    init_max = max_val
-    initial_beta = beta
-    while target_val - max_val < 0.01:
-        max_val,t, beta = Algo2_privacy_leakage_final(eps, CMF, sparse_approx =  sparse_approx, delta_ = delta_, default_beta = beta)
-        beta -= min(0.2,0.01*max(abs(target_val - max_val)*100, 1))
-        if beta <= 0:
-            beta = 0.01
-            print("Hit minus!", " target_val ", target_val, " max_val ", max_val, 'initial max', init_max, "initial_beta ", initial_beta)
-            return max_val, t, beta
-    # print("target_val ", target_val, "Final max_val", max_val, "beta", beta)
-    beta += 0.2 # min(0.1,0.005*max(abs(target_val - max_val)*1, 1))
-    return max_val, t, beta
