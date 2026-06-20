@@ -165,7 +165,7 @@ def cal_(CMF, Delta, tol = 1e-12):
         beta = alpha
     return alpha, beta, delta
 
-def DT(eps, CMF, Delta = 0, leakage_only = False, DT_parameters = (0,0,0), get_parameters=False):
+def DT(eps, CMF = 0, Delta = 0, leakage_only = False, DT_parameters = (0,0,0), get_parameters=False):
     if leakage_only:
         alpha, beta, delta = DT_parameters
         return CPL(alpha=alpha, beta=beta, delta=delta, eps=eps)
