@@ -156,7 +156,6 @@ def cal_(CMF, Delta, tol = 1e-12):
             phi = max(phi, sum(z))
 
     if np.isposinf(alpha):
-        print("phi ", phi)
         beta = np.log((-1 + delta) / (-1 + phi - 1e-12))
     else:
         beta = np.log((1 + phi + np.exp(alpha) * (-1 + delta) - 2 * delta) / (1 + (-1 + phi) * np.exp(alpha) - delta))
