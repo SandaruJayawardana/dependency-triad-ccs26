@@ -173,8 +173,6 @@ def DT(eps, CMF, Delta = 0, leakage_only = False, DT_parameters = (0,0,0), get_p
     if isinstance(Delta, int):
         Delta = np.zeros((np.shape(CMF)))
     
-    
-    print(np.shape(Delta))
     alpha, beta, delta = cal_(CMF, Delta)
 
     if get_parameters:
