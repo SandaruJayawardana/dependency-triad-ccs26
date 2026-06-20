@@ -117,7 +117,6 @@ cpl = DT(
 # Estimate CPL directly from previously computed DT parameters
 cpl = DT(
     eps=1.0,
-    CMF=CMF,
     leakage_only=True,
     DT_parameters=(alpha, beta, delta)
 )
