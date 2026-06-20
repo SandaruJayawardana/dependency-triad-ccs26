@@ -177,6 +177,7 @@ The smoke test performs the following steps:
    
 Expected output:
 
+Two plots that depict the estimated CPLs and estimation error (Figure 4(a) and 4(b) in the paper).
 
 ## 7. License
 
