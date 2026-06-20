@@ -97,7 +97,7 @@ CPL
 ### Example Usage
 
 ```python
-from privacy_leakage.DT import DT
+from src.CPL_metrics.DT import DT
 
 # Compute DT parameters
 alpha, beta, delta = DT(
