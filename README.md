@@ -171,10 +171,6 @@ pip install -r requirements.txt
 
 Run $test.ipynb$.
 
-The smoke test performs the following steps:
-
-1. 
-   
 Expected output:
 
 Two plots that depict the estimated CPLs and estimation error (Figure 4(a) and 4(b) in the paper).
