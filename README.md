@@ -1,4 +1,4 @@
-# Dependency Triad (ACM CCS 2026)
+# Dependency Triad
 
 Artifact for the paper **“Dependency Triad: A Metric to Quantify Dependencies Between Attributes for Local Differential Privacy.”**
 
