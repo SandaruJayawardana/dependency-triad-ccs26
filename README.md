@@ -159,20 +159,26 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-Install dependencies:
+Install dependencies (including test.ipynb):
 
 ```bash
 pip install --upgrade pip
+pip install jupyter nbconvert ipykernel
 pip install -r requirements.txt
 ```
 
 ## 6. Running the Smoke Test
 
-Run $test.ipynb$.
+Run $test.ipynb$ using:
+
+```bash
+jupyter notebook test.ipynb
+```
+Next, run all the cells.
 
 Expected output:
 
-Two plots that depict the estimated CPLs and estimation error (Figure 4(a) and 4(b) in the paper).
+The first two plots show the estimated CPLs and the corresponding estimation error, matching Figures 4(a) and 4(b) in the paper. The third plot shows the CPL estimated by DT under different levels of uncertainty.
 
 ## 7. License
 
