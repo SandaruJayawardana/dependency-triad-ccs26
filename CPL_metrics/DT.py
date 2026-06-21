@@ -4,31 +4,32 @@ Dependency Triad (DT) Metric Implementation
 ===========================================
 
 This module implements the Dependency Triad (DT) metric for quantifying
-correlation-induced privacy leakage between dependent attributes under Local
+correlation-induced privacy leakage (CPL) between dependent attributes under Local
 Differential Privacy (LDP). The DT metric summarizes the dependency between
 a target attribute X_k and a dependent attribute \hat{X} using three parameters:
 (alpha, beta, delta). These parameters can then be used to estimate the
-correlation-induced privacy leakage (CPL) under a given privacy budget epsilon.
+CPL under a given privacy budget epsilon.
 
-The main function is `DT()`, which supports two modes:
+The main function is `DT()`, which supports three modes:
 
 1. Parameter estimation:
-   Computes the DT parameters (alpha, beta, delta) from a conditional
-   probability matrix (CMF) and an optional distributional uncertainty matrix
-   (Delta).
+   Computes the DT parameters (alpha, beta, delta) from a CMF and 
+   an optional distributional uncertainty matrix (Delta).
 
-2. Leakage estimation:
-   Computes the CPL value from previously estimated DT parameters.
+2. Leakage estimation (from CMF and Delta): 
+   Computes the CPL value from 'CMF and Delta'. 
+
+3. Leakage estimation (from DT parameters:
+   Computes the CPL value from 'previously estimated DT parameters (alpha, beta, delta)'. Here, 'leakage_only = True'.
 
 Main Functions
 --------------
-DT(eps, CMF, Delta=0, leakage_only=False, DT_parameters=(0, 0, 0),
+DT(eps, CMF=0, Delta=0, leakage_only=False, DT_parameters=(0, 0, 0),
    get_parameters=False)
     Main interface for computing DT parameters or the corresponding CPL.
 
 cal_(CMF, Delta, tol=1e-12)
-    Computes the DT parameters (alpha, beta, delta) from the conditional
-    probability matrix and uncertainty bounds.
+    Computes the DT parameters (alpha, beta, delta) from the CMF and uncertainty bounds.
 
 CPL(eps, alpha, beta, delta)
     Computes the estimated CPL using the DT parameters and privacy budget eps.
@@ -47,6 +48,15 @@ Delta : numpy.ndarray or int, optional
 eps : float
     Local differential privacy budget.
 
+leakage_only : bool
+    If 'True', then estimate CPL from given DT parameters. Here, (alpha, beta, delta) should be given.
+
+get_parameters : bool
+    If 'True', then returns DT parameters. Here, CMF and optional Delta should be given.
+
+DT_parameters : tuple
+    DT parameters (alpha, beta, delta). 
+    
 Outputs
 -------
 Depending on the selected mode, the module returns either:
@@ -156,7 +166,6 @@ def cal_(CMF, Delta, tol = 1e-12):
             phi = max(phi, sum(z))
 
     if np.isposinf(alpha):
-        print("phi ", phi)
         beta = np.log((-1 + delta) / (-1 + phi - 1e-12))
     else:
         beta = np.log((1 + phi + np.exp(alpha) * (-1 + delta) - 2 * delta) / (1 + (-1 + phi) * np.exp(alpha) - delta))
@@ -172,7 +181,6 @@ def DT(eps, CMF = 0, Delta = 0, leakage_only = False, DT_parameters = (0,0,0), g
     
     if isinstance(Delta, int):
         Delta = np.zeros((np.shape(CMF)))
-    
     
     print(np.shape(Delta))
     alpha, beta, delta = cal_(CMF, Delta)
