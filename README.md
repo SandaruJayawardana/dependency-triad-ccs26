@@ -43,7 +43,7 @@ The repository is organized as follows.
 The main implementation of DT is provided in:
 
 ```text
-src/privacy_leakage/DT.py
+src/CPL_metrics/DT.py
 ```
 
 This file implements Algorithm 1 and Algorithm 2 from the paper.
@@ -51,7 +51,7 @@ This file implements Algorithm 1 and Algorithm 2 from the paper.
 ### Main Function
 
 ```python
-DT(eps, CMF, Delta=0, leakage_only=False, DT_parameters=(0, 0, 0), get_parameters=False)
+DT(eps, CMF=0, Delta=0, leakage_only=False, DT_parameters=(0, 0, 0), get_parameters=False)
 ```
 
 ### Parameters
