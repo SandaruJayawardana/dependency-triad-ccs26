@@ -88,7 +88,7 @@ DT(eps, CMF=0, Delta=0, leakage_only=False, DT_parameters=(0, 0, 0), get_paramet
 ```
 
 - Otherwise:  
-  Returns the estimated correlation-induced privacy leakage:
+  Returns the estimated CPL:
 
 ```python
 CPL
