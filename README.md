@@ -148,8 +148,8 @@ pip install -r requirements.txt
 Clone the repository:
 
 ```bash
-git clone https://github.com/SandaruJayawardana/CoP-artifacts-PETS
-cd CoP-artifacts-PETS
+git clone https://github.com/SandaruJayawardana/dependency-triad-ccs26
+cd dependency-triad-ccs26
 ```
 
 Create a virtual environment:
