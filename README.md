@@ -132,7 +132,6 @@ Required packages include:
 numpy
 scipy
 matplotlib
-torch
 pandas
 seaborn
 ```
